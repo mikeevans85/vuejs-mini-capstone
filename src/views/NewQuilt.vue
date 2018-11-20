@@ -1,13 +1,8 @@
 <template>
-  <div class="home">
-    <div class="jumbotron">
-      <h1 class="display-4">Welcome to Wade's Quilts!</h1>
-      <p class="lead">This is a website to buy my quilts. Take a look!
-      <hr class="my-4">
-      <p>Find out more information here.</p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </div> 
-    <h1>Add a quilt!</h1>
+  <div class="newquilt">
+    <div class="container">
+      <h1>Add a quilt!</h1>
+        <div class="row">
     Name: <input v-model="inputName" type="text">
     Size: <input v-model="inputSize" type="text">
     Price: <input v-model="inputPrice" type="text">
@@ -16,24 +11,8 @@
     <ul>
       <li v-for="error in Errors" class="text-danger">{{Errors}}</li>
     </ul>
-    <div class="container">
-      <div class="row">
-        <template id="QuiltCard">
-          <div v-for="quilt in quilts" class="col">
-            <div class="card-body" style="width: 18rem;">
-              <img class="card-img-top" v-bind:src="quilt.images[0] ? quilt.images[0] : 'http://i2.wp.com/www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg?zoom=2&fit=300%2C300'" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{ quilt.name }}</h5>
-                  <p class="card-size">{{ quilt.size }}</p>
-                  <p class="card-price">{{ quilt.price }}</p>
-                  <p class="card-text">{{ quilt.description }}</p>
-                  <a href="#" class="btn btn-primary">Details</a>
-                </div>
-            </div> 
-          </div> 
-        </template>
-      </div>
-    </div>  
+    </div>
+   </div> 
   </div>  
 </template>
 
@@ -85,6 +64,7 @@
               this.Errors = error.response.data.errors;
             }.bind(this)
           );
+        this.$router.push("/");
       }
     },
     computed: {}
