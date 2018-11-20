@@ -7,12 +7,19 @@
       <p>Find out more information here.</p>
       <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </div> 
+    <h1>Add a quilt!</h1>
+    Name: <input v-model="inputName" type="text">
+    Size: <input v-model="inputSize" type="text">
+    Price: <input v-model="inputPrice" type="text">
+    Description: <input v-model="inputDescription" type="text">
+    <button v-on:click="createQuilt()" class=" btn btn-primary">Add!</button>
+    <p>{{Errors}}</p>
     <div class="container">
       <div class="row">
         <template id="QuiltCard">
           <div v-for="quilt in quilts" class="col">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="https://i2.wp.com/www.sunflowerstitcheries.com/wp-content/uploads/2015/06/1-IMGP35841.jpg?w=364" alt="Card image cap">
+            <div class="card-body" style="width: 18rem;">
+              <img class="card-img-top" v-bind:src="quilt.images[0] ? quilt.images[0] : 'http://i2.wp.com/www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg?zoom=2&fit=300%2C300'" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{ quilt.name }}</h5>
                   <p class="card-size">{{ quilt.size }}</p>
@@ -37,7 +44,12 @@
     data: function() {
       return {
         message: "Welcome to Vue.js!",
-        quilts: []
+        quilts: [],
+        inputName: "",
+        inputSize: "",
+        inputPrice: "",
+        inputDescription: "",
+        Errors: []
       };
     },
     created: function() {
@@ -46,7 +58,33 @@
         this.quilts = response.data;
       }.bind(this));
     },
-    methods: {},
+    methods: {
+      createQuilt: function() {
+        console.log("createQuilt");
+        var params = {
+          name: this.inputName,
+          size: this.inputSize,
+          price: this.inputPrice,
+          description: this.inputDescription,
+          supplier_id: 1
+        };
+        axios.post("http://localhost:3000/api/quilts", params).then(function(response) {
+          console.log(response.data);
+          this.quilts.push(response.data);
+          this.inputName = "";
+          this.inputSize = "";
+          this.inputPrice = "";
+          this.inputDescription = "";
+        }.bind(this)
+        )
+          .catch(
+            function(error) {
+              console.log(error.response.data);
+              this.Errors = error.response.data.errors;
+            }.bind(this)
+          );
+      }
+    },
     computed: {}
 };
 </script>
