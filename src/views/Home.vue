@@ -5,17 +5,8 @@
       <p class="lead">This is a website to buy my quilts. Take a look!
       <hr class="my-4">
       <p>Find out more information here.</p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      <a class="btn btn-primary btn-lg" href="#/about" role="button">Learn more</a>
     </div> 
-    <h1>Add a quilt!</h1>
-    Name: <input v-model="inputName" type="text">
-    Size: <input v-model="inputSize" type="text">
-    Price: <input v-model="inputPrice" type="text">
-    Description: <input v-model="inputDescription" type="text">
-    <button v-on:click="createQuilt()" class=" btn btn-primary">Add!</button>
-    <ul>
-      <li v-for="error in Errors" class="text-danger">{{Errors}}</li>
-    </ul>
     <div class="container">
       <div class="row">
         <template id="QuiltCard">
@@ -27,7 +18,7 @@
                   <p class="card-size">{{ quilt.size }}</p>
                   <p class="card-price">{{ quilt.price }}</p>
                   <p class="card-text">{{ quilt.description }}</p>
-                  <a href="#" class="btn btn-primary">Details</a>
+                  <a v-bind:href="`/#/${quilt.id}`" class="btn btn-primary">Details</a>
                 </div>
             </div> 
           </div> 
@@ -60,33 +51,7 @@
         this.quilts = response.data;
       }.bind(this));
     },
-    methods: {
-      createQuilt: function() {
-        console.log("createQuilt");
-        var params = {
-          name: this.inputName,
-          size: this.inputSize,
-          price: this.inputPrice,
-          description: this.inputDescription,
-          supplier_id: 1
-        };
-        axios.post("http://localhost:3000/api/quilts", params).then(function(response) {
-          console.log(response.data);
-          this.quilts.push(response.data);
-          this.inputName = "";
-          this.inputSize = "";
-          this.inputPrice = "";
-          this.inputDescription = "";
-        }.bind(this)
-        )
-          .catch(
-            function(error) {
-              console.log(error.response.data);
-              this.Errors = error.response.data.errors;
-            }.bind(this)
-          );
-      }
-    },
+    methods: {},
     computed: {}
 };
 </script>
