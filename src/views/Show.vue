@@ -2,9 +2,11 @@
    <div class="Home">
      <div class="container">
       <h1>{{ quilts.name }}</h1>
-      <img v-bind:src="quilts.images" alt="">
+        <div class="images">
+      <img v-bind:src="quilts.images[0]" alt="">
+        </div>
       <h2>{{ quilts.price }}</h2>
-      <h2>{{ quilts.size }}</h2>
+      <h4>{{ quilts.size }}</h4>
       <p>{{ quilts.description }}</p>
        <a href="/#/">Back to all quilts</a>
      </div>
