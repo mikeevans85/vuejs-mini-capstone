@@ -6,3 +6,9 @@
     </div>
   </div>
 </template>
+
+<style>
+  .about {
+    text-align: center;
+  }
+</style>

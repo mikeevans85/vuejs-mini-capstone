@@ -24,11 +24,6 @@ export default new Router({
       component: About
     },
     {
-      path: "/:id",
-      name: "show",
-      component: Show
-    },
-    {
       path: "/newquilt",
       name: "newquilt",
       component: NewQuilt
@@ -52,6 +47,11 @@ export default new Router({
       path: "/logoutMessage",
       name: "logoutmessage",
       component: LogoutMessage
+    },
+    {
+      path: "/:id",
+      name: "show",
+      component: Show
     }
   ]
 });

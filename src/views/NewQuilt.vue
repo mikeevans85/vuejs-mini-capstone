@@ -1,12 +1,12 @@
 <template>
   <div class="newquilt">
     <div class="container">
-      <h1>Add a quilt!</h1>
+      <h1>Add a quilt!</h1><br>
         <div class="row">
     Name: <input v-model="inputName" type="text">
     Size: <input v-model="inputSize" type="text">
     Price: <input v-model="inputPrice" type="text">
-    Description: <input v-model="inputDescription" type="text">
+    Description: <input v-model="inputDescription" type="text"><br>
     <button v-on:click="createQuilt()" class=" btn btn-primary">Add!</button>
     <ul>
       <li v-for="error in Errors" class="text-danger">{{Errors}}</li>
@@ -17,6 +17,9 @@
 </template>
 
 <style>
+.container {
+  text-align: center;
+}
 </style>
 
 <script>
